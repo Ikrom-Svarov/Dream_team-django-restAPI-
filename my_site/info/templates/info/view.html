@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ task.title }}
+{% endblock %}
+{% block main %}
+
+{% endblock %}
+
+{% block content %}
+      <li>
+        <h3>{{ task.title }}</h3>
+       <small><p>{{ task.description }}</p></small>
+        {% if task.completed %}
+        <h5> <p>Completed</p> </h5>
+        {% else %}
+          <h5><p>Not completed</p></h5>
+        {% endif %}
+        <h5><p>Created: {{ task.created_at }}</p></h5>
+        <h5> <p>Last updated: {{ task.updated_at }}</p></h5>
+        <h5><p>Owner: {{ task.owner }}</p></h5>
+        
+            <form   method="post" action="#"> 
+            {% csrf_token %}
+        
+              <button  type="submit"  class="btn btn-danger">
+              <a href="{% url 'update' task.pk %}">Update </button>
+            </a>
+            </form>
+            
+
+            <br>
+            <div>
+                
+                <form method="post" action="{% url 'delete' task.pk  %}">
+                {% csrf_token %}
+        
+                
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+                <br>
+      </li>
+{% endblock %}
+
+
+
